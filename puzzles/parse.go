@@ -89,3 +89,42 @@ func ParsePasswordRules(reader io.Reader) ([]passwordRules, error) {
 
 	return rules, nil
 }
+
+/*
+
+input:
+```
+..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#
+```
+
+*/
+func ParseTobogganMap(reader io.Reader) (tobogganMap, error) {
+	grid := make(map[tobogganCoordinates]tobogganElement)
+	x := -1
+	y := -1
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		text := scanner.Text()
+		x = -1
+		y++
+		for _, c := range text {
+			x++
+			grid[tobogganCoordinates{x, y}] = tobogganElement(c)
+		}
+	}
+
+	return tobogganMap{grid: grid, size: tobogganCoordinates{
+		x: x + 1,
+		y: y + 1,
+	}}, nil
+}
