@@ -45,4 +45,34 @@ var _ = Describe("Puzzles", func() {
 		})
 
 	})
+
+	FContext("Day 2", func() {
+		subject = &passwordPhilosophy{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day2/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+
+			p1Result := result.day2.p1
+			Expect(p1Result.validPasswords).Should(Not(BeEmpty()))
+			fmt.Println(len(p1Result.validPasswords))
+
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day2/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+
+			p2Result := result.day2.p2
+			Expect(p2Result.validPasswords).Should(Not(BeEmpty()))
+			fmt.Println(len(p2Result.validPasswords))
+
+		})
+
+	})
 })
