@@ -22,8 +22,8 @@ output ```
 ```
 
 */
-func ParseToInt64Array(reader io.Reader) ([]int64, error) {
-	var inputs []int64
+func ParseToIntArray(reader io.Reader) ([]int, error) {
+	var inputs []int
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		numText := scanner.Text()
@@ -32,7 +32,7 @@ func ParseToInt64Array(reader io.Reader) ([]int64, error) {
 			return nil, err
 		}
 
-		inputs = append(inputs, num)
+		inputs = append(inputs, int(num))
 
 	}
 	return inputs, nil
@@ -62,7 +62,7 @@ func ParsePasswordRules(reader io.Reader) ([]passwordRules, error) {
 		// parse range
 		rangeParts := strings.Split(tokens[0], "-")
 		if len(rangeParts) != 2 {
-			return nil, errors.New("Expected 3 tokens. Eg. `1-3` ")
+			return nil, errors.New("Expected 2 tokens. Eg. `1-3` ")
 		}
 
 		var err error
@@ -86,6 +86,6 @@ func ParsePasswordRules(reader io.Reader) ([]passwordRules, error) {
 
 		rules = append(rules, rule)
 	}
-	
+
 	return rules, nil
 }

@@ -1,6 +1,9 @@
 package puzzles
 
-import "io"
+import (
+	"fmt"
+	"io"
+)
 
 type passwordPhilosophy struct {
 }
@@ -12,37 +15,39 @@ type passwordRules struct {
 	password string
 }
 
-func (p *passwordPhilosophy) Puzzle1(reader io.Reader) (result, error) {
+type validPasswords []string
+
+func (p *passwordPhilosophy) Puzzle1(reader io.Reader) (Result, error) {
 	rules, err := ParsePasswordRules(reader)
 	if err != nil {
-		return result{}, err
+		return nil, err
 	}
 
-	var validPasswords []string
+	var vpwds validPasswords
 	for _, rule := range rules {
 		if rule.isValid() {
-			validPasswords = append(validPasswords, rule.password)
+			vpwds = append(vpwds, rule.password)
 		}
 	}
 
-	return result{day2: day2Result{p1: day2p1Result{validPasswords: validPasswords}}}, nil
+	return vpwds, nil
 }
 
-func (p *passwordPhilosophy) Puzzle2(reader io.Reader) (result, error) {
+func (p *passwordPhilosophy) Puzzle2(reader io.Reader) (Result, error) {
 
 	rules, err := ParsePasswordRules(reader)
 	if err != nil {
-		return result{}, err
+		return nil, err
 	}
 
-	var validPasswords []string
+	var vpwds validPasswords
 	for _, rule := range rules {
 		if rule.isValidNew() {
-			validPasswords = append(validPasswords, rule.password)
+			vpwds = append(vpwds, rule.password)
 		}
 	}
 
-	return result{day2: day2Result{p2: day2p2Result{validPasswords: validPasswords}}}, nil
+	return vpwds, nil
 }
 
 func (r passwordRules) isValid() bool {
@@ -61,18 +66,22 @@ func (r passwordRules) isValid() bool {
 }
 
 func (r passwordRules) isValidNew() bool {
-	var occurences int
+	var occurrences int
 	for i, c := range r.password {
 		if i == int(r.min-1) || i == int(r.max-1) {
 			if c == r.letter {
-				occurences++
+				occurrences++
 			}
 		}
 	}
 
-	if occurences != 1 {
+	if occurrences != 1 {
 		return false
 	}
 
 	return true
+}
+
+func (v validPasswords) Value() string {
+	return fmt.Sprintf("%d", len(v))
 }
