@@ -177,3 +177,26 @@ func ParsePassports(reader io.Reader) ([]passport, error) {
 
 	return passports, nil
 }
+
+/*
+
+input:
+```
+BBFFBBFRLL
+FFFBBBFRRR
+BFFFBBFRRR
+
+```
+
+*/
+
+func ParseBoardingPasses(reader io.Reader) []string {
+	var boardingPasses []string
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		text := scanner.Text()
+		boardingPasses = append(boardingPasses, text)
+	}
+
+	return boardingPasses
+}
