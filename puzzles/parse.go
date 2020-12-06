@@ -200,3 +200,42 @@ func ParseBoardingPasses(reader io.Reader) []string {
 
 	return boardingPasses
 }
+
+/*
+
+input:
+```
+abc
+
+a
+b
+c
+
+```
+
+*/
+
+func ParseCustomsAnswers(reader io.Reader) []answer {
+	var answers []answer
+	scanner := bufio.NewScanner(reader)
+	groupAnswer := answer{yeses: map[rune]int{}}
+	var noOfPeople int
+	for scanner.Scan() {
+		text := scanner.Text()
+		if text == "" {
+			groupAnswer.noOfPeople = noOfPeople
+			answers = append(answers, groupAnswer)
+
+			noOfPeople = 0
+			groupAnswer = answer{yeses: map[rune]int{}}
+			continue
+		}
+		noOfPeople++
+		for _, c := range text {
+			groupAnswer.yeses[c] = groupAnswer.yeses[c] + 1
+		}
+	}
+	groupAnswer.noOfPeople = noOfPeople
+	answers = append(answers, groupAnswer)
+	return answers
+}

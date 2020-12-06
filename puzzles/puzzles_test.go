@@ -99,7 +99,7 @@ var _ = Describe("Puzzles", func() {
 		})
 	})
 
-	FContext("Day 5", func() {
+	Context("Day 5", func() {
 		subject := &binaryBoarding{128, 8}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day5/p1")
@@ -117,6 +117,27 @@ var _ = Describe("Puzzles", func() {
 			result, err := subject.Puzzle2(file)
 			Expect(err).To(BeNil())
 			Expect(result.Value()).Should(Equal("640"))
+		})
+	})
+
+	Context("Day 6", func() {
+		subject := &customCustoms{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day6/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("6161"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day6/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("2971"))
 		})
 	})
 
