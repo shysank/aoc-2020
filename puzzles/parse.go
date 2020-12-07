@@ -239,3 +239,67 @@ func ParseCustomsAnswers(reader io.Reader) []answer {
 	answers = append(answers, groupAnswer)
 	return answers
 }
+
+/*
+
+input:
+```
+light red bags contain 1 bright white bag, 2 muted yellow bags.
+dark orange bags contain 3 bright white bags, 4 muted yellow bags.
+bright white bags contain 1 shiny gold bag.
+```
+
+*/
+
+func ParseBags(reader io.Reader) (map[bagType][]contains, error) {
+	var bags = make(map[bagType][]contains)
+	scanner := bufio.NewScanner(reader)
+
+	for scanner.Scan() {
+		text := scanner.Text()
+		parts := strings.Split(text, " ")
+
+		// bagType
+		var color = ""
+		var rem []string
+		for i, p := range parts {
+			if p == "bags" {
+				rem = parts[i+2:]
+				break
+			}
+			color = color + p + " "
+		}
+		color = strings.Trim(color, " ")
+
+		if rem[0] == "no" && rem[1] == "other" && rem[2] == "bags." {
+			bags[bagType(color)] = []contains{}
+			continue
+		}
+
+		var containsList []contains
+		curr := contains{}
+		var newBag bool = true
+		for _, p := range rem {
+			if newBag {
+				n, err := strconv.ParseInt(p, 10, 32)
+				if err != nil {
+					return nil, err
+				}
+				curr.qty = int(n)
+				newBag = false
+				continue
+			}
+			if strings.Contains(p, ".") || strings.Contains(p, ",") {
+				curr.color = bagType(strings.Trim(string(curr.color), " "))
+				containsList = append(containsList, curr)
+				curr = contains{}
+				newBag = true
+				continue
+			}
+
+			curr.color = bagType(string(curr.color) + p + " ")
+		}
+		bags[bagType(color)] = containsList
+	}
+	return bags, nil
+}
