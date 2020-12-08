@@ -303,3 +303,33 @@ func ParseBags(reader io.Reader) (map[bagType][]contains, error) {
 	}
 	return bags, nil
 }
+
+/*
+
+input:
+```
+nop +0
+acc +1
+jmp +4
+acc +3
+```
+
+*/
+
+func ParseBootCode(reader io.Reader) (instructions []instruction, err error) {
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		text := scanner.Text()
+		parts := strings.Split(text, " ")
+		if len(parts) != 2 {
+			return nil, errors.New("Expected instruction of form `nop +0`")
+		}
+
+		kind := instructionType(parts[0])
+		arg, _ := strconv.ParseInt(parts[1], 10, 32)
+
+		instructions = append(instructions, instruction{kind, int(arg)})
+	}
+
+	return instructions, nil
+}
