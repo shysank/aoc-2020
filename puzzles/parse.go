@@ -333,3 +333,31 @@ func ParseBootCode(reader io.Reader) (instructions []instruction, err error) {
 
 	return instructions, nil
 }
+
+/*
+
+input:
+```
+35
+20
+15
+25
+47
+40
+```
+
+*/
+
+func ParseToInt64Array(reader io.Reader) (nos []int64, err error) {
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		text := scanner.Text()
+		n, err := strconv.ParseInt(text, 10, 64)
+		if err != nil {
+			return nil, err
+		}
+		nos = append(nos, n)
+	}
+
+	return nos, nil
+}

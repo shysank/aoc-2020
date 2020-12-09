@@ -183,4 +183,25 @@ var _ = Describe("Puzzles", func() {
 		})
 	})
 
+	Context("Day 9", func() {
+		subject := &encodingError{preambleLength: 25}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day9/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("248131121"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day9/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("31580383"))
+		})
+	})
+
 })
