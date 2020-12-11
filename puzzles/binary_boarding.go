@@ -1,7 +1,6 @@
 package puzzles
 
 import (
-	"fmt"
 	"io"
 )
 
@@ -10,12 +9,10 @@ type binaryBoarding struct {
 	cols int
 }
 
-type seatId int
-
 func (b *binaryBoarding) Puzzle1(reader io.Reader) (Result, error) {
 	boardingPasses := ParseBoardingPasses(reader)
 
-	var maxSeatIdVal seatId
+	var maxSeatId int
 	for _, bp := range boardingPasses {
 		rowCode := bp[:len(bp)-3]
 		colCode := bp[len(bp)-3:]
@@ -25,12 +22,12 @@ func (b *binaryBoarding) Puzzle1(reader io.Reader) (Result, error) {
 
 		seat := (row * b.cols) + col
 
-		if seat > int(maxSeatIdVal) {
-			maxSeatIdVal = seatId(seat)
+		if seat > int(maxSeatId) {
+			maxSeatId = seat
 		}
 	}
 
-	return maxSeatIdVal, nil
+	return intResult(maxSeatId), nil
 }
 
 func (b *binaryBoarding) Puzzle2(reader io.Reader) (Result, error) {
@@ -48,15 +45,15 @@ func (b *binaryBoarding) Puzzle2(reader io.Reader) (Result, error) {
 		sorted = insertSort(sorted, seat)
 	}
 
-	var missingSeat seatId
+	var missingSeat int
 	for i, seat := range sorted {
 		if sorted[i+1]-seat == 2 {
-			missingSeat = seatId(seat + 1)
+			missingSeat = seat + 1
 			break
 		}
 	}
 
-	return missingSeat, nil
+	return intResult(missingSeat), nil
 }
 
 func insertSort(arr []int, num int) []int {
@@ -93,8 +90,4 @@ func decode(code string, index, min, max int) int {
 
 	return decode(code, index, min, max)
 
-}
-
-func (m seatId) Value() string {
-	return fmt.Sprintf("%d", m)
 }

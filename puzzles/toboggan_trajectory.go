@@ -6,27 +6,16 @@ import (
 )
 
 type tobogganTrajectory struct {
-	slopes []tobogganCoordinates
+	slopes []coordinates
 }
-
-type tobogganMap struct {
-	grid map[tobogganCoordinates]tobogganElement
-	size tobogganCoordinates
-}
-
-type tobogganCoordinates struct {
-	x, y int
-}
-
-type tobogganElement string
 
 type tobogganResult struct {
 	trees []int
 }
 
 const (
-	emptySpace tobogganElement = "."
-	tree       tobogganElement = "#"
+	emptySpace string = "."
+	tree       string = "#"
 )
 
 func (t tobogganTrajectory) Puzzle1(reader io.Reader) (Result, error) {
@@ -38,7 +27,7 @@ func (t tobogganTrajectory) Puzzle2(reader io.Reader) (Result, error) {
 }
 
 func (t tobogganTrajectory) findTreeCount(reader io.Reader) (Result, error) {
-	tmap, err := ParseTobogganMap(reader)
+	tmap, err := ParseLayout(reader)
 	if err != nil {
 		return nil, err
 	}
@@ -53,30 +42,26 @@ func (t tobogganTrajectory) findTreeCount(reader io.Reader) (Result, error) {
 	return result, nil
 }
 
-func (t tobogganMap) treeCountForSlope(slope tobogganCoordinates) int {
+func (l layout) isTreeAt(x, y int) bool {
+	return l.valueAt(x, y) == tree
+}
+
+func (l layout) isEmptySpaceAt(x, y int) bool {
+	return l.valueAt(x, y) == emptySpace
+}
+
+func (l layout) treeCountForSlope(slope coordinates) int {
 	x := 0
 	trees := 0
-	for y := 0; y < t.size.y; {
-		if t.isTreeAt(x, y) {
+	for y := 0; y < l.size.y; {
+		if l.isTreeAt(x, y) {
 			trees++
 		}
-		x = (x + slope.x) % t.size.x
+		x = (x + slope.x) % l.size.x
 		y = y + slope.y
 	}
 
 	return trees
-}
-
-func (t tobogganMap) valueAt(x, y int) tobogganElement {
-	return t.grid[tobogganCoordinates{x, y}]
-}
-
-func (t tobogganMap) isTreeAt(x, y int) bool {
-	return t.valueAt(x, y) == tree
-}
-
-func (t tobogganMap) isEmptySpaceAt(x, y int) bool {
-	return t.valueAt(x, y) == emptySpace
 }
 
 func (t tobogganResult) Value() string {

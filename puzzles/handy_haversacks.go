@@ -1,7 +1,6 @@
 package puzzles
 
 import (
-	"fmt"
 	"io"
 )
 
@@ -16,15 +15,13 @@ type contains struct {
 	color bagType
 }
 
-type bagCount int
-
 func (h handyHaversacks) Puzzle1(reader io.Reader) (Result, error) {
 	bags, err := ParseBags(reader)
 	if err != nil {
 		return nil, err
 	}
 
-	var waysCount bagCount
+	var waysCount int
 	for k, _ := range bags {
 		if k == h.colorToCheck {
 			continue
@@ -33,7 +30,7 @@ func (h handyHaversacks) Puzzle1(reader io.Reader) (Result, error) {
 			waysCount++
 		}
 	}
-	return waysCount, nil
+	return intResult(waysCount), nil
 }
 
 func (h handyHaversacks) Puzzle2(reader io.Reader) (Result, error) {
@@ -42,7 +39,7 @@ func (h handyHaversacks) Puzzle2(reader io.Reader) (Result, error) {
 		return nil, err
 	}
 
-	var bagsCount = bagCount(totalBags(bags, h.colorToCheck))
+	var bagsCount = intResult(totalBags(bags, h.colorToCheck))
 
 	return bagsCount, nil
 }
@@ -77,8 +74,4 @@ func totalBags(bags map[bagType][]contains, curr bagType) int {
 	}
 
 	return bagCount
-}
-
-func (b bagCount) Value() string {
-	return fmt.Sprintf("%d", b)
 }

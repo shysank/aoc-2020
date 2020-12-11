@@ -1,15 +1,12 @@
 package puzzles
 
 import (
-	"fmt"
 	"io"
 	"sort"
 )
 
 type adapterArray struct {
 }
-
-type jolts int
 
 func (a adapterArray) Puzzle1(reader io.Reader) (Result, error) {
 	joltages, err := ParseToIntArray(reader)
@@ -29,7 +26,7 @@ func (a adapterArray) Puzzle1(reader io.Reader) (Result, error) {
 
 	joltDiffs[3] = joltDiffs[3] + 1
 
-	return jolts(joltDiffs[3] * joltDiffs[1]), nil
+	return intResult(joltDiffs[3] * joltDiffs[1]), nil
 }
 
 func (a adapterArray) Puzzle2(reader io.Reader) (Result, error) {
@@ -67,7 +64,7 @@ func (a adapterArray) Puzzle2(reader io.Reader) (Result, error) {
 
 	}
 
-	return jolts(routes), nil
+	return intResult(routes), nil
 }
 
 func findSubSequenceStartIndex(arr []int, index int) int {
@@ -100,8 +97,4 @@ func waysInSubSequence(arr []int, index int) int {
 	}
 
 	return prevRoutes + prev1 + prev2
-}
-
-func (j jolts) Value() string {
-	return fmt.Sprintf("%d", j)
 }

@@ -1,7 +1,6 @@
 package puzzles
 
 import (
-	"fmt"
 	"io"
 	"regexp"
 	"strconv"
@@ -17,8 +16,6 @@ type passport struct {
 }
 
 type predicate func(string) bool
-
-type validPassports int
 
 func NewPassportProcessing() *passportProcessing {
 	return &passportProcessing{
@@ -41,7 +38,7 @@ func (p *passportProcessing) Puzzle1(reader io.Reader) (Result, error) {
 		return nil, err
 	}
 
-	var valPassports validPassports
+	var valPassports int
 	for _, passport := range passports {
 		requiredFields := copyMap(p.requiredFields)
 		optionalFields := copyMap(p.optionalFields)
@@ -49,7 +46,7 @@ func (p *passportProcessing) Puzzle1(reader io.Reader) (Result, error) {
 			valPassports++
 		}
 	}
-	return valPassports, nil
+	return intResult(valPassports), nil
 }
 
 func (p *passportProcessing) Puzzle2(reader io.Reader) (Result, error) {
@@ -58,7 +55,7 @@ func (p *passportProcessing) Puzzle2(reader io.Reader) (Result, error) {
 		return nil, err
 	}
 
-	var valPassports validPassports
+	var valPassports int
 	for _, passport := range passports {
 		requiredFields := copyMap(p.requiredFields)
 		optionalFields := copyMap(p.optionalFields)
@@ -66,7 +63,7 @@ func (p *passportProcessing) Puzzle2(reader io.Reader) (Result, error) {
 			valPassports++
 		}
 	}
-	return valPassports, nil
+	return intResult(valPassports), nil
 }
 
 func (p passport) isValid(requiredFields, optionalFields map[string]predicate) bool {
@@ -98,10 +95,6 @@ func (p passport) strictValid(requiredFields, optionalFields map[string]predicat
 	}
 
 	return false
-}
-
-func (v validPassports) Value() string {
-	return fmt.Sprintf("%d", v)
 }
 
 func copyMap(original map[string]predicate) map[string]predicate {

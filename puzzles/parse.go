@@ -109,8 +109,8 @@ input:
 ```
 
 */
-func ParseTobogganMap(reader io.Reader) (tobogganMap, error) {
-	grid := make(map[tobogganCoordinates]tobogganElement)
+func ParseLayout(reader io.Reader) (*layout, error) {
+	grid := make(map[coordinates]string)
 	x := -1
 	y := -1
 	scanner := bufio.NewScanner(reader)
@@ -120,11 +120,11 @@ func ParseTobogganMap(reader io.Reader) (tobogganMap, error) {
 		y++
 		for _, c := range text {
 			x++
-			grid[tobogganCoordinates{x, y}] = tobogganElement(c)
+			grid[coordinates{x, y}] = string(c)
 		}
 	}
 
-	return tobogganMap{grid: grid, size: tobogganCoordinates{
+	return &layout{grid: grid, size: coordinates{
 		x: x + 1,
 		y: y + 1,
 	}}, nil

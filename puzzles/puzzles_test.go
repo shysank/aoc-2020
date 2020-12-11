@@ -61,7 +61,7 @@ var _ = Describe("Puzzles", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day3/p1")
 			Expect(err).To(BeNil())
 
-			subject.slopes = []tobogganCoordinates{{3, 1}}
+			subject.slopes = []coordinates{{3, 1}}
 			result, err := subject.Puzzle1(file)
 			Expect(err).To(BeNil())
 			Expect(result.Value()).Should(Equal("223"))
@@ -71,7 +71,7 @@ var _ = Describe("Puzzles", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day3/p1")
 			Expect(err).To(BeNil())
 
-			subject.slopes = []tobogganCoordinates{{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}}
+			subject.slopes = []coordinates{{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}}
 			result, err := subject.Puzzle1(file)
 			Expect(err).To(BeNil())
 			Expect(result.Value()).Should(Equal("3517401300"))
@@ -204,7 +204,7 @@ var _ = Describe("Puzzles", func() {
 		})
 	})
 
-	FContext("Day 10", func() {
+	Context("Day 10", func() {
 		subject := &adapterArray{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day10/p1")
@@ -222,6 +222,27 @@ var _ = Describe("Puzzles", func() {
 			result, err := subject.Puzzle2(file)
 			Expect(err).To(BeNil())
 			Expect(result.Value()).Should(Equal("129586085429248"))
+		})
+	})
+
+	Context("Day 11", func() {
+		subject := &seatingSystem{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day11/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("2481"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day11/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("2227"))
 		})
 	})
 

@@ -2,7 +2,6 @@ package puzzles
 
 import (
 	"errors"
-	"fmt"
 	"io"
 )
 
@@ -26,8 +25,6 @@ type instruction struct {
 }
 
 type instructionType string
-
-type codeOutput int
 
 const (
 	acc instructionType = "acc"
@@ -62,7 +59,7 @@ func (h handheldHalting) Puzzle1(reader io.Reader) (Result, error) {
 
 	err = vm.run()
 	if err == infiniteLoopError {
-		return codeOutput(vm.acc), nil
+		return intResult(vm.acc), nil
 	}
 
 	return nil, errors.New("Expected Infinite Loop")
@@ -98,7 +95,7 @@ func (h handheldHalting) Puzzle2(reader io.Reader) (Result, error) {
 		}
 	}
 
-	return codeOutput(vm.acc), nil
+	return intResult(vm.acc), nil
 }
 
 func (c *consoleVM) run() error {
@@ -142,8 +139,4 @@ func jmpHandler(vm *consoleVM, arg int) {
 
 func nopHandler(vm *consoleVM, arg int) {
 	vm.curr++
-}
-
-func (c codeOutput) Value() string {
-	return fmt.Sprintf("%d", c)
 }

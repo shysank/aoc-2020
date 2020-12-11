@@ -2,7 +2,6 @@ package puzzles
 
 import (
 	"errors"
-	"fmt"
 	"io"
 	"sort"
 )
@@ -11,8 +10,6 @@ type encodingError struct {
 	preambleLength int
 	invalidNum     int64
 }
-
-type xmasNum int
 
 type sortInt64 []int64
 
@@ -26,7 +23,7 @@ func (e *encodingError) Puzzle1(reader io.Reader) (Result, error) {
 		preamble := nos[i-e.preambleLength : i]
 		if !isXMASValid(preamble, nos[i]) {
 			e.invalidNum = nos[i]
-			return xmasNum(nos[i]), nil
+			return intResult(nos[i]), nil
 		}
 	}
 	return nil, errors.New("Cannot find XMAS weakness")
@@ -41,7 +38,7 @@ func (e *encodingError) Puzzle2(reader io.Reader) (Result, error) {
 	c := findContinuousSet(nos, e.invalidNum)
 	sort.Sort(sortInt64(c))
 	min, max := c[0], c[len(c)-1]
-	return xmasNum(min + max), nil
+	return intResult(min + max), nil
 }
 
 func isXMASValid(preamble []int64, num int64) bool {
@@ -82,8 +79,4 @@ func (s sortInt64) Swap(i, j int) {
 }
 func (s sortInt64) Less(i, j int) bool {
 	return s[i] < s[j]
-}
-
-func (x xmasNum) Value() string {
-	return fmt.Sprintf("%d", x)
 }
