@@ -204,4 +204,25 @@ var _ = Describe("Puzzles", func() {
 		})
 	})
 
+	FContext("Day 10", func() {
+		subject := &adapterArray{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day10/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("2376"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day10/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("129586085429248"))
+		})
+	})
+
 })
