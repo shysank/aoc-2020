@@ -361,3 +361,32 @@ func ParseToInt64Array(reader io.Reader) (nos []int64, err error) {
 
 	return nos, nil
 }
+
+/*
+
+input:
+```
+F10
+N3
+F7
+R90
+F11
+```
+
+*/
+
+func ParseNavInstructions(reader io.Reader) (ins []navInstruction, err error) {
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		text := scanner.Text()
+		action := text[0]
+		val := text[1:]
+		n, err := strconv.ParseInt(val, 10, 32)
+		if err != nil {
+			return nil, err
+		}
+		ins = append(ins, navInstruction{action: string(action), value: int(n)})
+	}
+
+	return ins, nil
+}
