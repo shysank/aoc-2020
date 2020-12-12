@@ -4,7 +4,7 @@ import (
 	"io"
 )
 
-type customCustoms struct {
+type CustomCustoms struct {
 }
 
 type answer struct {
@@ -12,7 +12,7 @@ type answer struct {
 	noOfPeople int
 }
 
-func (c *customCustoms) Puzzle1(reader io.Reader) (Result, error) {
+func (c *CustomCustoms) Puzzle1(reader io.Reader) (Result, error) {
 	answers := ParseCustomsAnswers(reader)
 
 	var yesCount int
@@ -23,7 +23,7 @@ func (c *customCustoms) Puzzle1(reader io.Reader) (Result, error) {
 	return intResult(yesCount), nil
 }
 
-func (c *customCustoms) Puzzle2(reader io.Reader) (Result, error) {
+func (c *CustomCustoms) Puzzle2(reader io.Reader) (Result, error) {
 	answers := ParseCustomsAnswers(reader)
 
 	var everyoneYesCount int

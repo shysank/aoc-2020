@@ -13,7 +13,7 @@ var _ = Describe("Puzzles", func() {
 	)
 
 	Context("Day 1", func() {
-		subject := &reportRepair{2020}
+		subject := &ReportRepair{2020}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day1/p1")
 			Expect(err).To(BeNil())
@@ -35,7 +35,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 2", func() {
-		subject := &passwordPhilosophy{}
+		subject := &PasswordPhilosophy{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day2/p1")
 			Expect(err).To(BeNil())
@@ -56,7 +56,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 3", func() {
-		subject := &tobogganTrajectory{}
+		subject := &TobogganTrajectory{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day3/p1")
 			Expect(err).To(BeNil())
@@ -100,7 +100,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 5", func() {
-		subject := &binaryBoarding{128, 8}
+		subject := &BinaryBoarding{128, 8}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day5/p1")
 			Expect(err).To(BeNil())
@@ -121,7 +121,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 6", func() {
-		subject := &customCustoms{}
+		subject := &CustomCustoms{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day6/p1")
 			Expect(err).To(BeNil())
@@ -142,7 +142,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 7", func() {
-		subject := &handyHaversacks{colorToCheck: "shiny gold"}
+		subject := &HandyHaversacks{colorToCheck: "shiny gold"}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day7/p1")
 			Expect(err).To(BeNil())
@@ -163,7 +163,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 8", func() {
-		subject := &handheldHalting{}
+		subject := &HandheldHalting{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day8/p1")
 			Expect(err).To(BeNil())
@@ -184,7 +184,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 9", func() {
-		subject := &encodingError{preambleLength: 25}
+		subject := &EncodingError{preambleLength: 25}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day9/p1")
 			Expect(err).To(BeNil())
@@ -205,7 +205,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 10", func() {
-		subject := &adapterArray{}
+		subject := &AdapterArray{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day10/p1")
 			Expect(err).To(BeNil())
@@ -226,7 +226,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 11", func() {
-		subject := &seatingSystem{}
+		subject := &SeatingSystem{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day11/p1")
 			Expect(err).To(BeNil())
@@ -247,7 +247,7 @@ var _ = Describe("Puzzles", func() {
 	})
 
 	Context("Day 12", func() {
-		subject := &rainRisk{}
+		subject := &RainRisk{}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day12/p1")
 			Expect(err).To(BeNil())

@@ -4,12 +4,12 @@ import (
 	"io"
 )
 
-type binaryBoarding struct {
+type BinaryBoarding struct {
 	rows int
 	cols int
 }
 
-func (b *binaryBoarding) Puzzle1(reader io.Reader) (Result, error) {
+func (b *BinaryBoarding) Puzzle1(reader io.Reader) (Result, error) {
 	boardingPasses := ParseBoardingPasses(reader)
 
 	var maxSeatId int
@@ -30,7 +30,7 @@ func (b *binaryBoarding) Puzzle1(reader io.Reader) (Result, error) {
 	return intResult(maxSeatId), nil
 }
 
-func (b *binaryBoarding) Puzzle2(reader io.Reader) (Result, error) {
+func (b *BinaryBoarding) Puzzle2(reader io.Reader) (Result, error) {
 	boardingPasses := ParseBoardingPasses(reader)
 
 	sorted := make([]int, len(boardingPasses))

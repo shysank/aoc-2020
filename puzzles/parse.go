@@ -10,18 +10,11 @@ import (
 )
 
 /*
-
-input: ```
-input: ```
+```
 10
 20
 30
 ```
-
-output ```
-[10,20,30]
-```
-
 */
 func ParseToIntArray(reader io.Reader) ([]int, error) {
 	var inputs []int
@@ -40,14 +33,10 @@ func ParseToIntArray(reader io.Reader) ([]int, error) {
 }
 
 /*
-
-input: ```
-input: ```
+```
 1-3 a: abcde
 1-3 b: cdefg
 2-9 c: ccccccccc
-```
-
 */
 func ParsePasswordRules(reader io.Reader) ([]passwordRules, error) {
 	var rules []passwordRules
@@ -92,8 +81,6 @@ func ParsePasswordRules(reader io.Reader) ([]passwordRules, error) {
 }
 
 /*
-
-input:
 ```
 ..##.......
 #...#...#..
@@ -107,7 +94,6 @@ input:
 #...##....#
 .#..#...#.#
 ```
-
 */
 func ParseLayout(reader io.Reader) (*layout, error) {
 	grid := make(map[coordinates]string)
@@ -131,9 +117,6 @@ func ParseLayout(reader io.Reader) (*layout, error) {
 }
 
 /*
-
-input:
-
 ```
 ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm
@@ -148,9 +131,7 @@ hgt:179cm
 
 hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in
-
 ```
-
 */
 func ParsePassports(reader io.Reader) ([]passport, error) {
 	var passports []passport
@@ -179,15 +160,11 @@ func ParsePassports(reader io.Reader) ([]passport, error) {
 }
 
 /*
-
-input:
 ```
 BBFFBBFRLL
 FFFBBBFRRR
 BFFFBBFRRR
-
 ```
-
 */
 
 func ParseBoardingPasses(reader io.Reader) []string {
@@ -202,19 +179,14 @@ func ParseBoardingPasses(reader io.Reader) []string {
 }
 
 /*
-
-input:
 ```
 abc
 
 a
 b
 c
-
 ```
-
 */
-
 func ParseCustomsAnswers(reader io.Reader) []answer {
 	var answers []answer
 	scanner := bufio.NewScanner(reader)
@@ -241,14 +213,11 @@ func ParseCustomsAnswers(reader io.Reader) []answer {
 }
 
 /*
-
-input:
 ```
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
 bright white bags contain 1 shiny gold bag.
 ```
-
 */
 
 func ParseBags(reader io.Reader) (map[bagType][]contains, error) {
@@ -305,17 +274,13 @@ func ParseBags(reader io.Reader) (map[bagType][]contains, error) {
 }
 
 /*
-
-input:
 ```
 nop +0
 acc +1
 jmp +4
 acc +3
 ```
-
 */
-
 func ParseBootCode(reader io.Reader) (instructions []instruction, err error) {
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
@@ -335,8 +300,6 @@ func ParseBootCode(reader io.Reader) (instructions []instruction, err error) {
 }
 
 /*
-
-input:
 ```
 35
 20
@@ -345,7 +308,6 @@ input:
 47
 40
 ```
-
 */
 
 func ParseToInt64Array(reader io.Reader) (nos []int64, err error) {
@@ -363,8 +325,6 @@ func ParseToInt64Array(reader io.Reader) (nos []int64, err error) {
 }
 
 /*
-
-input:
 ```
 F10
 N3
@@ -372,7 +332,6 @@ F7
 R90
 F11
 ```
-
 */
 
 func ParseNavInstructions(reader io.Reader) (ins []navInstruction, err error) {
@@ -390,3 +349,4 @@ func ParseNavInstructions(reader io.Reader) (ins []navInstruction, err error) {
 
 	return ins, nil
 }
+

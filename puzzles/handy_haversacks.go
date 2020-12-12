@@ -4,7 +4,7 @@ import (
 	"io"
 )
 
-type handyHaversacks struct {
+type HandyHaversacks struct {
 	colorToCheck bagType
 }
 
@@ -15,7 +15,7 @@ type contains struct {
 	color bagType
 }
 
-func (h handyHaversacks) Puzzle1(reader io.Reader) (Result, error) {
+func (h HandyHaversacks) Puzzle1(reader io.Reader) (Result, error) {
 	bags, err := ParseBags(reader)
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func (h handyHaversacks) Puzzle1(reader io.Reader) (Result, error) {
 	return intResult(waysCount), nil
 }
 
-func (h handyHaversacks) Puzzle2(reader io.Reader) (Result, error) {
+func (h HandyHaversacks) Puzzle2(reader io.Reader) (Result, error) {
 	bags, err := ParseBags(reader)
 	if err != nil {
 		return nil, err

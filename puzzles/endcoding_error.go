@@ -6,14 +6,14 @@ import (
 	"sort"
 )
 
-type encodingError struct {
+type EncodingError struct {
 	preambleLength int
 	invalidNum     int64
 }
 
 type sortInt64 []int64
 
-func (e *encodingError) Puzzle1(reader io.Reader) (Result, error) {
+func (e *EncodingError) Puzzle1(reader io.Reader) (Result, error) {
 	nos, err := ParseToInt64Array(reader)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (e *encodingError) Puzzle1(reader io.Reader) (Result, error) {
 	return nil, errors.New("Cannot find XMAS weakness")
 }
 
-func (e *encodingError) Puzzle2(reader io.Reader) (Result, error) {
+func (e *EncodingError) Puzzle2(reader io.Reader) (Result, error) {
 	nos, err := ParseToInt64Array(reader)
 	if err != nil {
 		return nil, err

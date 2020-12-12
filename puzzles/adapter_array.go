@@ -5,10 +5,10 @@ import (
 	"sort"
 )
 
-type adapterArray struct {
+type AdapterArray struct {
 }
 
-func (a adapterArray) Puzzle1(reader io.Reader) (Result, error) {
+func (a AdapterArray) Puzzle1(reader io.Reader) (Result, error) {
 	joltages, err := ParseToIntArray(reader)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ func (a adapterArray) Puzzle1(reader io.Reader) (Result, error) {
 	return intResult(joltDiffs[3] * joltDiffs[1]), nil
 }
 
-func (a adapterArray) Puzzle2(reader io.Reader) (Result, error) {
+func (a AdapterArray) Puzzle2(reader io.Reader) (Result, error) {
 	joltages, err := ParseToIntArray(reader)
 	if err != nil {
 		return nil, err

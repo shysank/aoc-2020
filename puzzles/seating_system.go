@@ -4,7 +4,7 @@ import (
 	"io"
 )
 
-type seatingSystem struct {
+type SeatingSystem struct {
 }
 
 const (
@@ -13,7 +13,7 @@ const (
 	occupied string = "#"
 )
 
-func (s seatingSystem) Puzzle1(reader io.Reader) (Result, error) {
+func (s SeatingSystem) Puzzle1(reader io.Reader) (Result, error) {
 	l, err := ParseLayout(reader)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func (s seatingSystem) Puzzle1(reader io.Reader) (Result, error) {
 
 }
 
-func (s seatingSystem) Puzzle2(reader io.Reader) (Result, error) {
+func (s SeatingSystem) Puzzle2(reader io.Reader) (Result, error) {
 	l, err := ParseLayout(reader)
 	if err != nil {
 		return nil, err

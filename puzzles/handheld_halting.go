@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-type handheldHalting struct {
+type HandheldHalting struct {
 }
 
 type consoleVM struct {
@@ -49,7 +49,7 @@ func (c *consoleVM) registerHandlers() {
 	c.handlers[nop] = nopHandler
 }
 
-func (h handheldHalting) Puzzle1(reader io.Reader) (Result, error) {
+func (h HandheldHalting) Puzzle1(reader io.Reader) (Result, error) {
 	instructions, err := ParseBootCode(reader)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (h handheldHalting) Puzzle1(reader io.Reader) (Result, error) {
 
 }
 
-func (h handheldHalting) Puzzle2(reader io.Reader) (Result, error) {
+func (h HandheldHalting) Puzzle2(reader io.Reader) (Result, error) {
 	instructions, err := ParseBootCode(reader)
 	if err != nil {
 		return nil, err

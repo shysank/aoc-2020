@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-type passportProcessing struct {
+type PassportProcessing struct {
 	requiredFields map[string]predicate
 	optionalFields map[string]predicate
 }
@@ -17,8 +17,8 @@ type passport struct {
 
 type predicate func(string) bool
 
-func NewPassportProcessing() *passportProcessing {
-	return &passportProcessing{
+func NewPassportProcessing() *PassportProcessing {
+	return &PassportProcessing{
 		requiredFields: map[string]predicate{
 			"byr": byrPredicate, "iyr": iyrPredicate, "eyr": eyrPredicate, "hgt": hgtPredicate, "hcl": hclPredicate,
 			"ecl": eclPredicate, "pid": pidPredicate,
@@ -32,7 +32,7 @@ func NewPassportProcessing() *passportProcessing {
 	}
 }
 
-func (p *passportProcessing) Puzzle1(reader io.Reader) (Result, error) {
+func (p *PassportProcessing) Puzzle1(reader io.Reader) (Result, error) {
 	passports, err := ParsePassports(reader)
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (p *passportProcessing) Puzzle1(reader io.Reader) (Result, error) {
 	return intResult(valPassports), nil
 }
 
-func (p *passportProcessing) Puzzle2(reader io.Reader) (Result, error) {
+func (p *PassportProcessing) Puzzle2(reader io.Reader) (Result, error) {
 	passports, err := ParsePassports(reader)
 	if err != nil {
 		return nil, err

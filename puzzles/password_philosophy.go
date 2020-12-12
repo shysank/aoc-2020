@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-type passwordPhilosophy struct {
+type PasswordPhilosophy struct {
 }
 
 type passwordRules struct {
@@ -17,7 +17,7 @@ type passwordRules struct {
 
 type validPasswords []string
 
-func (p *passwordPhilosophy) Puzzle1(reader io.Reader) (Result, error) {
+func (p *PasswordPhilosophy) Puzzle1(reader io.Reader) (Result, error) {
 	rules, err := ParsePasswordRules(reader)
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func (p *passwordPhilosophy) Puzzle1(reader io.Reader) (Result, error) {
 	return vpwds, nil
 }
 
-func (p *passwordPhilosophy) Puzzle2(reader io.Reader) (Result, error) {
+func (p *PasswordPhilosophy) Puzzle2(reader io.Reader) (Result, error) {
 
 	rules, err := ParsePasswordRules(reader)
 	if err != nil {

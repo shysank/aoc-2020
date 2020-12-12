@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-type tobogganTrajectory struct {
+type TobogganTrajectory struct {
 	slopes []coordinates
 }
 
@@ -18,15 +18,15 @@ const (
 	tree       string = "#"
 )
 
-func (t tobogganTrajectory) Puzzle1(reader io.Reader) (Result, error) {
+func (t TobogganTrajectory) Puzzle1(reader io.Reader) (Result, error) {
 	return t.findTreeCount(reader)
 }
 
-func (t tobogganTrajectory) Puzzle2(reader io.Reader) (Result, error) {
+func (t TobogganTrajectory) Puzzle2(reader io.Reader) (Result, error) {
 	return t.findTreeCount(reader)
 }
 
-func (t tobogganTrajectory) findTreeCount(reader io.Reader) (Result, error) {
+func (t TobogganTrajectory) findTreeCount(reader io.Reader) (Result, error) {
 	tmap, err := ParseLayout(reader)
 	if err != nil {
 		return nil, err

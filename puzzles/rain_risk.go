@@ -2,17 +2,17 @@ package puzzles
 
 import "io"
 
-type rainRisk struct {
+type RainRisk struct {
 }
 
-func (r rainRisk) Puzzle1(reader io.Reader) (Result, error) {
+func (r RainRisk) Puzzle1(reader io.Reader) (Result, error) {
 	ins, err := ParseNavInstructions(reader)
 	if err != nil {
 		return nil, err
 	}
 
-	ship := &vector{
-		pos: coordinates{0, 0},
+	ship := &directionalVector{
+		pos: vector{0, 0},
 		dir: east,
 	}
 	for _, i := range ins {
@@ -22,14 +22,14 @@ func (r rainRisk) Puzzle1(reader io.Reader) (Result, error) {
 	return intResult(ship.pos.manhattanDistance()), nil
 }
 
-func (r rainRisk) Puzzle2(reader io.Reader) (Result, error) {
+func (r RainRisk) Puzzle2(reader io.Reader) (Result, error) {
 	ins, err := ParseNavInstructions(reader)
 	if err != nil {
 		return nil, err
 	}
 
-	ship := &coordinates{0, 0}
-	waypoint := &coordinates{10, 1}
+	ship := &vector{0, 0}
+	waypoint := &vector{10, 1}
 
 	for _, i := range ins {
 		if i.isDirection() {
