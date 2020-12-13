@@ -350,3 +350,37 @@ func ParseNavInstructions(reader io.Reader) (ins []navInstruction, err error) {
 	return ins, nil
 }
 
+/*
+```
+939
+7,13,x,x,59,x,31,19
+```
+*/
+
+func ParseNotes(reader io.Reader) (n *notes, err error) {
+	scanner := bufio.NewScanner(reader)
+	scanner.Scan()
+	timestamp, err := strconv.ParseInt(scanner.Text(), 10, 32)
+	if err != nil {
+		return nil, err
+	}
+
+	n = new(notes)
+	n.earliestTime = int(timestamp)
+
+	scanner.Scan()
+	busIDs := strings.Split(scanner.Text(), ",")
+	for _, id := range busIDs {
+		if id == "x" {
+			n.busIDs = append(n.busIDs, -1)
+		} else {
+			busId, err := strconv.ParseInt(id, 10, 32)
+			if err != nil {
+				return nil, err
+			}
+			n.busIDs = append(n.busIDs, int(busId))
+		}
+	}
+
+	return n, nil
+}

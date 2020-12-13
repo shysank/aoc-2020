@@ -11,8 +11,6 @@ type coordinates struct {
 	x, y int
 }
 
-type intResult int
-
 func (l *layout) valueAt(x, y int) string {
 	return l.grid[coordinates{x, y}]
 }

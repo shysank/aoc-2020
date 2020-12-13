@@ -2,14 +2,22 @@ package main
 
 import (
 	"fmt"
+	"github.com/shysank/aoc-2020/puzzles"
 )
 
 func main() {
+	crtTest()
+}
 
-	var arr = []int{12, 13, 15, 16,17}
+func crtTest() {
+	var eqs = puzzles.CRTEquations{puzzles.NewEquation(0, 17), puzzles.NewEquation(11, 13),
+		puzzles.NewEquation(16, 19)}
+	x := eqs.Solve()
+	fmt.Println(x)
+}
 
-
-
+func waysTest() {
+	var arr = []int{12, 13, 15, 16, 17}
 	w := ways(arr, len(arr)-1)
 
 	fmt.Println(w)

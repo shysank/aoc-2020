@@ -13,7 +13,13 @@ type Solver interface {
 type Result interface {
 	Value() string
 }
+type intResult int
+type int64Result int64
 
 func (i intResult) Value() string {
+	return fmt.Sprintf("%d", i)
+}
+
+func (i int64Result) Value() string {
 	return fmt.Sprintf("%d", i)
 }
