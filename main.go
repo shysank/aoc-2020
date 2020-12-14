@@ -3,10 +3,19 @@ package main
 import (
 	"fmt"
 	"github.com/shysank/aoc-2020/puzzles"
+	"math/big"
 )
 
 func main() {
-	crtTest()
+	bitsTest()
+}
+
+func bitsTest() {
+	var bits = big.NewInt(int64(11))
+	bits.SetBit(bits, 1, 0)
+	bits.SetBit(bits, 6, 1)
+	fmt.Println(bits)
+
 }
 
 func crtTest() {

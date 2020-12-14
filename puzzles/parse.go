@@ -384,3 +384,65 @@ func ParseNotes(reader io.Reader) (n *notes, err error) {
 
 	return n, nil
 }
+
+/*
+```
+mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
+mem[8] = 11
+mem[7] = 101
+mem[8] = 0
+```
+*/
+
+func ParseInitializationProgram(reader io.Reader) (ops bitOperations, err error) {
+	scanner := bufio.NewScanner(reader)
+
+	for scanner.Scan() {
+		text := scanner.Text()
+
+		parts := strings.Split(text, "=")
+		if len(parts) != 2 {
+			return nil, errors.New("Shoule be of form mask = val or mem[x] = val")
+		}
+
+		if strings.Contains(parts[0], "mask") {
+			maskOp := maskOperation{val: map[int]int{}}
+			mask := strings.Trim(parts[1], " ")
+			var j = 0
+			for i := len(mask) - 1; i >= 0; i-- {
+				if string(mask[i]) != "X" {
+					n, err := strconv.ParseInt(string(mask[i]), 10, 32)
+					if err != nil {
+						return nil, err
+					}
+					maskOp.val[j] = int(n)
+				} else {
+					maskOp.val[j] = -1
+				}
+				j++
+			}
+			ops = append(ops, bitOperation{maskOp: &maskOp})
+		} else {
+			memOp := memOperation{}
+
+			memLocParts := strings.Split(parts[0], "[")
+			memLoc := strings.Trim(memLocParts[1], "] ")
+			loc, err := strconv.ParseInt(memLoc, 10, 32)
+			if err != nil {
+				return nil, err
+			}
+
+			val := strings.Trim(parts[1], " ")
+			v, err := strconv.ParseInt(val, 10, 32)
+			if err != nil {
+				return nil, err
+			}
+			memOp.loc = loc
+			memOp.val = v
+			ops = append(ops, bitOperation{memOp: &memOp})
+		}
+
+	}
+
+	return ops, nil
+}
