@@ -309,4 +309,19 @@ var _ = Describe("Puzzles", func() {
 		})
 	})
 
+	Context("Day 15", func() {
+		subject := &RambunctiousRecitation{[]int{5, 1, 9, 18, 13, 8, 0}, 2020}
+		It("puzzle 1", func() {
+			result, err := subject.Puzzle1(nil)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("376"))
+		})
+
+		It("puzzle 2", func() {
+			subject := &RambunctiousRecitation{[]int{5, 1, 9, 18, 13, 8, 0}, 30000000}
+			result, err := subject.Puzzle2(nil)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("323780"))
+		})
+	})
 })
