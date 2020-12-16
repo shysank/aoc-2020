@@ -324,4 +324,26 @@ var _ = Describe("Puzzles", func() {
 			Expect(result.Value()).Should(Equal("323780"))
 		})
 	})
+
+	Context("Day 16", func() {
+		subject := &TicketTranslation{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day16/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("30869"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day16/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("4381476149273"))
+		})
+
+	})
 })

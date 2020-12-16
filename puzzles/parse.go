@@ -446,3 +446,111 @@ func ParseInitializationProgram(reader io.Reader) (ops bitOperations, err error)
 
 	return ops, nil
 }
+
+/*
+```
+class: 1-3 or 5-7
+row: 6-11 or 33-44
+seat: 13-40 or 45-50
+
+your ticket:
+7,1,14
+
+nearby tickets:
+7,3,47
+40,4,50
+55,2,20
+38,6,12
+```
+*/
+
+func ParseTickets(reader io.Reader) (rulesMap map[string][]ticketRule, yourTicket ticket, nearbyTickets []ticket, err error) {
+	scanner := bufio.NewScanner(reader)
+
+	// parse rules
+	rulesMap = make(map[string][]ticketRule)
+	for scanner.Scan() {
+		text := scanner.Text()
+		if text == "" {
+			break
+		}
+		parts := strings.Split(text, ": ")
+		ruleName := parts[0]
+
+		rangeParts := strings.Split(parts[1], "or")
+		for _, rp := range rangeParts {
+			rp = strings.Trim(rp, " ")
+			p := strings.Split(rp, "-")
+			start, err := strconv.ParseInt(p[0], 10, 32)
+			if err != nil {
+				return nil, ticket{}, nil, err
+			}
+			end, err := strconv.ParseInt(p[1], 10, 32)
+			if err != nil {
+				return nil, ticket{}, nil, err
+			}
+
+			if _, ok := rulesMap[ruleName]; !ok {
+				rulesMap[ruleName] = []ticketRule{{int(start), int(end)}}
+			} else {
+				rulesMap[ruleName] = append(rulesMap[ruleName], ticketRule{int(start), int(end)})
+			}
+
+		}
+
+	}
+
+	// parse your ticket
+	for scanner.Scan() {
+		text := scanner.Text()
+
+		if text == "" {
+			break
+		}
+
+		if text == "your ticket:" {
+			yourTicket = ticket{}
+			continue
+		}
+
+		valsParts := strings.Split(text, ",")
+		for _, valStr := range valsParts {
+			val, err := strconv.ParseInt(valStr, 10, 32)
+			if err != nil {
+				return nil, ticket{}, nil, err
+			}
+			yourTicket.vals = append(yourTicket.vals, int(val))
+
+		}
+
+	}
+
+	// parse nearby tickets
+	var curr ticket
+	for scanner.Scan() {
+		text := scanner.Text()
+
+		if text == "" {
+			break
+		}
+
+		if text == "nearby tickets:" {
+			continue
+		}
+
+		curr = ticket{}
+		valsParts := strings.Split(text, ",")
+		for _, valStr := range valsParts {
+			val, err := strconv.ParseInt(valStr, 10, 32)
+			if err != nil {
+				return nil, ticket{}, nil, err
+			}
+			curr.vals = append(curr.vals, int(val))
+
+		}
+		nearbyTickets = append(nearbyTickets, curr)
+
+	}
+
+	return rulesMap, yourTicket, nearbyTickets, nil
+}
