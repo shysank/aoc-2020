@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/shysank/aoc-2020/calc"
 	"github.com/shysank/aoc-2020/puzzles"
 	"math/big"
+	"os"
 )
 
 func main() {
-	bitsTest()
+	calcTest()
 }
 
 func bitsTest() {
@@ -50,4 +52,22 @@ func ways(arr []int, index int) int {
 
 	return prevRoutes + prev1 + prev2
 
+}
+
+func calcTest() {
+	text := "(8 * 3 + 9 + 3 * 4 * 3)"
+	lexer := calc.NewLexer(text)
+	parser, err := calc.NewParser(&lexer)
+	addMulInvertedParser := calc.InvertedRuleParser{parser}
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+	ast, err := addMulInvertedParser.Expr()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	cal := calc.Calculator{}
+	r, _ := cal.Eval(ast)
+	fmt.Println(r)
 }

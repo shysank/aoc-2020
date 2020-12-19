@@ -167,15 +167,15 @@ BFFFBBFRRR
 ```
 */
 
-func ParseBoardingPasses(reader io.Reader) []string {
-	var boardingPasses []string
+func ParseToStringArray(reader io.Reader) []string {
+	var result []string
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		text := scanner.Text()
-		boardingPasses = append(boardingPasses, text)
+		result = append(result, text)
 	}
 
-	return boardingPasses
+	return result
 }
 
 /*

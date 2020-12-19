@@ -347,7 +347,7 @@ var _ = Describe("Puzzles", func() {
 
 	})
 
-	FContext("Day 17", func() {
+	Context("Day 17", func() {
 		subject := &ConwayCubes{cycles: 6}
 		It("puzzle 1", func() {
 			file, err := os.Open(inputFilesBaseDir + "/day17/p1")
@@ -365,6 +365,28 @@ var _ = Describe("Puzzles", func() {
 			result, err := subject.Puzzle2(file)
 			Expect(err).To(BeNil())
 			Expect(result.Value()).Should(Equal("2136"))
+		})
+
+	})
+
+	Context("Day 18", func() {
+		subject := &OperationOrder{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day18/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("45283905029161"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day18/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("216975281211165"))
 		})
 
 	})
