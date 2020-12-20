@@ -554,3 +554,50 @@ func ParseTickets(reader io.Reader) (rulesMap map[string][]ticketRule, yourTicke
 
 	return rulesMap, yourTicket, nearbyTickets, nil
 }
+
+func ParseMessageRules(reader io.Reader) (map[int]messageRule, []string) {
+	scanner := bufio.NewScanner(reader)
+
+	rulesMap := make(map[int]messageRule)
+	for scanner.Scan() {
+		text := scanner.Text()
+		if text == "" {
+			break
+		}
+		m := messageRule{}
+		parts := strings.Split(text, ":")
+
+		id, _ := strconv.ParseInt(parts[0], 10, 32)
+		m.id = int(id)
+
+		subrules := parts[1]
+		subruleParts := strings.Split(subrules, "|")
+		subruleParts1 := strings.Split(strings.Trim(subruleParts[0], " "), " ")
+
+		for _, s := range subruleParts1 {
+			sid, err := strconv.ParseInt(s, 10, 32)
+			if err != nil {
+				m.val = strings.Trim(s, "\"")
+			} else {
+				m.subRules1 = append(m.subRules1, int(sid))
+			}
+		}
+
+		if len(subruleParts) == 2 {
+			subruleParts2 := strings.Split(strings.Trim(subruleParts[1], " "), " ")
+			for _, s := range subruleParts2 {
+				sid, _ := strconv.ParseInt(s, 10, 32)
+				m.subRules2 = append(m.subRules2, int(sid))
+			}
+		}
+
+		rulesMap[int(id)] = m
+	}
+
+	var words []string
+	for scanner.Scan() {
+		words = append(words, scanner.Text())
+	}
+
+	return rulesMap, words
+}
