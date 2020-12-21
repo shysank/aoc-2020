@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	calcTest()
+	gridTest()
 }
 
 func bitsTest() {
@@ -70,4 +70,25 @@ func calcTest() {
 	cal := calc.Calculator{}
 	r, _ := cal.Eval(ast)
 	fmt.Println(r)
+}
+
+func gridTest() {
+	grid := `#....####.
+#..#.##...
+#.##..#...
+######.#.#
+.#...#.#.#
+.#########
+.###.#..#.
+########.#
+##...##.#.
+..###.#.#.
+`
+	l := puzzles.ParseLayoutFromString(grid)
+	l.Print()
+	l.RotateLeft()
+	l.RotateLeft()
+	l.RotateLeft()
+	l.Flip()
+	l.Print()
 }

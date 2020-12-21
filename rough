@@ -56,3 +56,44 @@
  (t+3)%19 =  0
 
 t2+2t)
+
+
+..#.###...
+##.##....#
+..#.###..#
+###.#..###
+.######.##
+#.#.#.#...
+#.###.###.
+#.###.##..
+.######...
+.##...####
+
+..#.###...
+##.##....#
+..#.###..#
+###.#..###
+.######.##
+#.#.#.#...
+#.###.###.
+#.###.##..
+.######...
+.##...####
+
+
+mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
+trh fvjkl sbzzf   (contains dairy)
+sqjhc fvjkl (contains soy)
+sqjhc mxmxvkd sbzzf (contains fish)
+
+mxmxvkd - dairy, fish
+kfcds - dairy, fish
+sqjhc - dairy, fish, soy
+nhms - dairy, fish
+trh - dairy
+fvjkl - dairy, soy
+sbzzf - dairy, fish
+
+dairy -
+fish -
+soy -

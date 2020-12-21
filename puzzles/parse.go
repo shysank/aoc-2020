@@ -96,12 +96,19 @@ func ParsePasswordRules(reader io.Reader) ([]passwordRules, error) {
 ```
 */
 func ParseLayout(reader io.Reader) (*layout, error) {
+	scanner := bufio.NewScanner(reader)
+	return parseLayout(scanner), nil
+}
+
+func parseLayout(scanner *bufio.Scanner) *layout {
 	grid := make(map[coordinates]string)
 	x := -1
 	y := -1
-	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		text := scanner.Text()
+		if text == "" {
+			break
+		}
 		x = -1
 		y++
 		for _, c := range text {
@@ -113,7 +120,12 @@ func ParseLayout(reader io.Reader) (*layout, error) {
 	return &layout{grid: grid, size: coordinates{
 		x: x + 1,
 		y: y + 1,
-	}}, nil
+	}}
+}
+
+func ParseLayoutFromString(text string) *layout {
+	scanner := bufio.NewScanner(strings.NewReader(text))
+	return parseLayout(scanner)
 }
 
 /*
@@ -601,3 +613,24 @@ func ParseMessageRules(reader io.Reader) (map[int]messageRule, []string) {
 
 	return rulesMap, words
 }
+
+func ParseTiles(reader io.Reader) (tiles, error) {
+
+	tilesMap := make(map[int]*tile)
+
+	scanner := bufio.NewScanner(reader)
+
+	for scanner.Scan() {
+		tileText := scanner.Text()
+		tilesParts := strings.Split(tileText, "Tile ")
+		tileNoStr := strings.Trim(tilesParts[1], ":")
+		tileNo, err := strconv.ParseInt(tileNoStr, 10, 32)
+		if err != nil {
+			return nil, err
+		}
+		l := parseLayout(scanner)
+		tilesMap[int(tileNo)] = &tile{id: int(tileNo), layout: l}
+	}
+	return tilesMap, nil
+}
+

@@ -19,9 +19,9 @@ func (s SeatingSystem) Puzzle1(reader io.Reader) (Result, error) {
 		return nil, err
 	}
 	var newLayout, oldLayout *layout
-	oldLayout = l.duplicate()
+	oldLayout = l.Clone()
 	for {
-		newLayout = oldLayout.duplicate()
+		newLayout = oldLayout.Clone()
 		var unchanged = true
 		for y := 0; y < l.size.y; y++ {
 			for x := 0; x < l.size.x; x++ {
@@ -47,9 +47,9 @@ func (s SeatingSystem) Puzzle2(reader io.Reader) (Result, error) {
 		return nil, err
 	}
 	var newLayout, oldLayout *layout
-	oldLayout = l.duplicate()
+	oldLayout = l.Clone()
 	for {
-		newLayout = oldLayout.duplicate()
+		newLayout = oldLayout.Clone()
 		var unchanged = true
 		for y := 0; y < l.size.y; y++ {
 			for x := 0; x < l.size.x; x++ {

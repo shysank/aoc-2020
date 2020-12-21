@@ -412,4 +412,26 @@ var _ = Describe("Puzzles", func() {
 		})
 
 	})
+
+	Context("Day 20", func() {
+		subject := &JurassicJigsaw{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day20/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("4006801655873"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day20/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("1838"))
+		})
+
+	})
 })
