@@ -3,6 +3,7 @@ package puzzles
 import (
 	"fmt"
 	"io"
+	"strings"
 )
 
 type Solver interface {
@@ -15,6 +16,7 @@ type Result interface {
 }
 type intResult int
 type int64Result int64
+type stringArrayResult []string
 
 func (i intResult) Value() string {
 	return fmt.Sprintf("%d", i)
@@ -22,4 +24,12 @@ func (i intResult) Value() string {
 
 func (i int64Result) Value() string {
 	return fmt.Sprintf("%d", i)
+}
+
+func (s stringArrayResult) Value() string {
+	var result string
+	for _, v := range s {
+		result += v + ","
+	}
+	return strings.Trim(result, ",")
 }

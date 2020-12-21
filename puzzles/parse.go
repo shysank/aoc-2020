@@ -634,3 +634,27 @@ func ParseTiles(reader io.Reader) (tiles, error) {
 	return tilesMap, nil
 }
 
+/*
+```
+mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
+trh fvjkl sbzzf mxmxvkd (contains dairy)
+sqjhc fvjkl (contains soy)
+sqjhc mxmxvkd sbzzf (contains fish)
+```
+*/
+
+func ParseFood(reader io.Reader) (foods, error) {
+	var foods []food
+	scanner := bufio.NewScanner(reader)
+
+	for scanner.Scan() {
+		text := scanner.Text()
+		parts := strings.Split(text, "(contains ")
+		ingredients := strings.Split(strings.Trim(parts[0], " "), " ")
+		allergensStr := strings.Trim(parts[1], ")")
+		allergens := strings.Split(allergensStr, ", ")
+		foods = append(foods, food{ingredients: ingredients, allergens: allergens})
+	}
+
+	return foods, nil
+}
