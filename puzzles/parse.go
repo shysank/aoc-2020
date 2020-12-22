@@ -17,17 +17,19 @@ import (
 ```
 */
 func ParseToIntArray(reader io.Reader) ([]int, error) {
-	var inputs []int
 	scanner := bufio.NewScanner(reader)
+	return parseToIntArray(scanner)
+}
+
+func parseToIntArray(scanner *bufio.Scanner) ([]int, error) {
+	var inputs []int
 	for scanner.Scan() {
 		numText := scanner.Text()
 		num, err := strconv.ParseInt(numText, 10, 32)
 		if err != nil {
 			return nil, err
 		}
-
 		inputs = append(inputs, int(num))
-
 	}
 	return inputs, nil
 }
@@ -657,4 +659,67 @@ func ParseFood(reader io.Reader) (foods, error) {
 	}
 
 	return foods, nil
+}
+
+/*
+```
+Player 1:
+9
+2
+6
+3
+1
+
+Player 2:
+5
+8
+4
+7
+10
+```
+*/
+
+func ParseGame(reader io.Reader) (*combatGame, error) {
+	var combat = combatGame{}
+	scanner := bufio.NewScanner(reader)
+
+	var player1 player
+	for scanner.Scan() {
+		text := scanner.Text()
+		if text == "" {
+			break
+		}
+		if text == "Player 1:" {
+			player1 = player{name: "Player 1"}
+			continue
+		}
+		num, err := strconv.ParseInt(text, 10, 32)
+		if err != nil {
+			return nil, err
+		}
+		player1.cards = append(player1.cards, int(num))
+
+	}
+
+	var player2 player
+	for scanner.Scan() {
+		text := scanner.Text()
+		if text == "" {
+			break
+		}
+		if text == "Player 2:" {
+			player2 = player{name: "Player 2"}
+			continue
+		}
+		num, err := strconv.ParseInt(text, 10, 32)
+		if err != nil {
+			return nil, err
+		}
+		player2.cards = append(player2.cards, int(num))
+	}
+
+	combat.player1 = &player1
+	combat.player2 = &player2
+
+	return &combat, nil
 }

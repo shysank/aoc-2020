@@ -456,4 +456,26 @@ var _ = Describe("Puzzles", func() {
 		})
 
 	})
+
+	Context("Day 22", func() {
+		subject := &CrabCombat{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day22/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("35397"))
+		})
+
+		It("puzzle 2", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day22/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("31120"))
+		})
+
+	})
 })
