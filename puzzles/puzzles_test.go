@@ -478,4 +478,21 @@ var _ = Describe("Puzzles", func() {
 		})
 
 	})
+
+	Context("Day 23", func() {
+		subject := &CrabCups{label: "739862541", moves: 100, max: ten-1}
+		It("puzzle 1", func() {
+			result, err := subject.Puzzle1(nil)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("94238657"))
+		})
+
+		It("puzzle 2", func() {
+			subject = &CrabCups{label: "739862541", moves: oneMillion*10, max: oneMillion}
+			result, err := subject.Puzzle2(nil)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("3072905352"))
+		})
+
+	})
 })

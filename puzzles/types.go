@@ -17,6 +17,7 @@ type Result interface {
 type intResult int
 type int64Result int64
 type stringArrayResult []string
+type stringResult string
 
 func (i intResult) Value() string {
 	return fmt.Sprintf("%d", i)
@@ -32,4 +33,8 @@ func (s stringArrayResult) Value() string {
 		result += v + ","
 	}
 	return strings.Trim(result, ",")
+}
+
+func (s stringResult) Value() string {
+	return string(s)
 }
