@@ -723,3 +723,42 @@ func ParseGame(reader io.Reader) (*combatGame, error) {
 
 	return &combat, nil
 }
+
+/*
+```
+sesenwnenenewseeswwswswwnenewsewsw
+neeenesenwnwwswnenewnwwsewnenwseswesw
+seswneswswsenwwnwse
+```
+*/
+
+func ParseTileDirections(reader io.Reader) []tilePath {
+	var tiles []tilePath
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		text := scanner.Text()
+
+		t := tilePath{dirs: []string{}}
+
+		dirs := []string{dirEast, dirWest, dirNorthEast, dirNorthWest, dirSouthEast, dirSouthWest}
+		var curr string
+		for _, d := range text {
+			curr += string(d)
+			if isPresent(dirs, curr) {
+				t.dirs = append(t.dirs, curr)
+				curr = ""
+			}
+		}
+		tiles = append(tiles, t)
+	}
+	return tiles
+}
+
+func isPresent(arr []string, val string) bool {
+	for _, v := range arr {
+		if v == val {
+			return true
+		}
+	}
+	return false
+}

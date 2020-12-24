@@ -495,4 +495,27 @@ var _ = Describe("Puzzles", func() {
 		})
 
 	})
+
+	Context("Day 24", func() {
+		subject := &LobbyLayout{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day24/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("400"))
+		})
+
+		It("puzzle 2", func() {
+			subject.days = 100
+			file, err := os.Open(inputFilesBaseDir + "/day24/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle2(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("3768"))
+		})
+
+	})
 })
