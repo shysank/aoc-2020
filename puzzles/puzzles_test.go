@@ -1,6 +1,7 @@
 package puzzles
 
 import (
+	"fmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"os"
@@ -515,6 +516,23 @@ var _ = Describe("Puzzles", func() {
 			result, err := subject.Puzzle2(file)
 			Expect(err).To(BeNil())
 			Expect(result.Value()).Should(Equal("3768"))
+		})
+
+	})
+
+	Context("Day 25", func() {
+		subject := &ComboBreaker{}
+		It("puzzle 1", func() {
+			file, err := os.Open(inputFilesBaseDir + "/day25/p1")
+			Expect(err).To(BeNil())
+
+			result, err := subject.Puzzle1(file)
+			Expect(err).To(BeNil())
+			Expect(result.Value()).Should(Equal("10187657"))
+		})
+
+		It("puzzle 2", func() {
+			fmt.Println("\n----THE END----")
 		})
 
 	})
